@@ -1,0 +1,43 @@
+{% extends "layouts/base.html" %}
+{% load bootstrap5 %}
+{% block title %} Actualizar cERTIFICADOR {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<form action="{% url 'certificador_update' object.id %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+
+ <div class="card border-0 shadow mb-4 mt-5">
+        <div class="card-header">
+            <h5 class="card-title">Actualizar Certificador</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col">{% bootstrap_field form.name %}</div>
+                <div class="col">{% bootstrap_field form.cargo %}</div>
+            </div>
+
+            <div class="row">
+                <div class="col">{% bootstrap_field form.tomo %}</div>
+                <div class="col">{% bootstrap_field form.folio %}</div>
+                <div class="col">{% bootstrap_field form.numero %}</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="col text-end" >
+                <button type="submit" class="btn btn-success animate-up-2">Actualizar</button>
+                <a href="{% url 'certificador_list' %}" type="button" class="btn btn-secondary animate-up-2">Cerrar</a>
+            </div>
+        </div>
+    </div>
+
+
+</form>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

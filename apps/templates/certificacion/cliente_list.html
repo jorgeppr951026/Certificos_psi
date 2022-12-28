@@ -1,0 +1,142 @@
+{% extends "layouts/base.html" %}
+{% load bootstrap5 %}
+{% block title %} Listado de Clientes {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="/static/assets/datatables/datatables.min.css" />
+
+
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="py-4">
+
+    <div class="d-flex justify-content-end">
+        <a href="{% url 'cliente_create' %}" class="btn btn-primary animate-up-2">
+            <i class="fa fa-plus"></i>
+            Crear Cliente</a>
+
+        <a href="{% url 'cliente_sincronizar' %}" class="btn btn-primary animate-up-2 ms-2">
+            <i class="fa fa-plus"></i>
+            Sincronizar Clientes</a>
+    </div>
+
+</div>
+
+{{msg}}
+
+<div class="card border-0 shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="clientesTable" class="table table-centered table-nowrap mb-0 rounded">
+                <thead class="thead-light">
+                    <tr>
+                        <th class="border-0 rounded-start">#</th>
+                        <th class="border-0">Nombre:</th>
+                        <th class="border-0">Organnismo:</th>
+                     
+                       
+                        <th class="border-0 rounded-end">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cliente in object_list   %}
+
+                    <!-- Item -->
+                    <tr>
+                        <td><a href="#" class="text-primary fw-bold">{{cliente.codigo}}</a> </td>
+                     
+                        <td> {{cliente.name }} </td>
+                        <td> {{cliente.organismo }} </td>
+                       
+                       
+                        <td class="text-success">
+                            <div class="d-flex align-items-center">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                 
+                                    <a href="{% url 'cliente_update' cliente.codigo %}" type="button"
+                                        class="btn btn-sm btn-secondary">
+                                        <i class="fas fa-edit" aria-hidden="true"></i>
+                                    </a>
+                                    <button onclick="delete_cliente('{% url 'cliente_delete' cliente.codigo %}')" type="button"
+                                        class="btn btn-sm btn-primary">
+                                        <i class="fas fa-trash" aria-hidden="true"></i>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- End of Item -->
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!--<div class="modal fade" id="update_cliente" role="dialog"></div>-->
+<div class="modal fade" id="delete_cliente" role="dialog"></div>
+<div class="modal fade" id="create_cliente" role="dialog"></div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+    function create_cliente(url) {
+        $('#create_cliente').load(url, function () {
+            $(this).modal('show');
+        });
+    }
+</script>
+
+<script>
+    function delete_cliente(url) {
+        $('#delete_cliente').load(url, function () {
+            $(this).modal('show');
+        });
+    }
+</script>
+
+<script>
+    function update_cliente(url) {
+        $('#update_cliente').load(url, function () {
+            $(this).modal('show');
+        });
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        var table = $('#clientesTable').DataTable({
+
+            buttons: [{
+                extend: 'copy',
+                text: 'Copiar'
+            }, 'csv', 'excel', 'pdf'],
+            language: {
+                "lengthMenu": "Mostrar _MENU_ registros",
+                "zeroRecords": "No se encontró nada - lo sentimos",
+                "info": "Mostrando pagina _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                "search": "Buscar:",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                },
+            }
+        });
+
+        table.buttons().container()
+            .appendTo('#clientesTable_wrapper .col-md-6:eq(0)');
+    });
+</script>
+
+{% endblock javascripts %}

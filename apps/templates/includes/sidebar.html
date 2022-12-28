@@ -1,0 +1,173 @@
+       {% load static %}
+
+
+
+       <nav class="navbar navbar-dark navbar-theme-primary px-4 col-12 d-lg-none">
+         <a class="navbar-brand me-lg-5" href="/">
+           <img class="navbar-brand-dark" src="/static/assets/img/brand/light.svg" alt="Volt logo" /> <img
+             class="navbar-brand-light" src="/static/assets/img/brand/dark.svg" alt="Volt logo" />
+         </a>
+         <div class="d-flex align-items-center">
+           <button class="navbar-toggler d-lg-none collapsed" type="button" data-bs-toggle="collapse"
+             data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+             aria-label="Toggle navigation">
+             <span class="navbar-toggler-icon"></span>
+           </button>
+         </div>
+       </nav>
+
+       <nav id="sidebarMenu" class="sidebar d-lg-block bg-gray-800 text-white collapse" data-simplebar>
+         <div class="sidebar-inner px-4 pt-3">
+           <div
+             class="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
+             <div class="d-flex align-items-center">
+               <div class="avatar-lg me-4">
+                 <img src="/static/assets/img/team/profile-picture-3.jpg"
+                   class="card-img-top rounded-circle border-white" alt="Bonnie Green">
+               </div>
+               <div class="d-block">
+                 <h2 class="h5 mb-3">Hi, Jane</h2>
+                 <a href="/page-sign-in.html" class="btn btn-secondary btn-sm d-inline-flex align-items-center">
+                   <svg class="icon icon-xxs me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                     xmlns="http://www.w3.org/2000/svg">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                       d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                     </path>
+                   </svg>
+                   Sign Out
+                 </a>
+               </div>
+             </div>
+             <div class="collapse-close d-md-none">
+               <a href="#sidebarMenu" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
+                 aria-controls="sidebarMenu" aria-expanded="true" aria-label="Toggle navigation">
+                 <svg class="icon icon-xs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                   <path fill-rule="evenodd"
+                     d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                     clip-rule="evenodd"></path>
+                 </svg>
+               </a>
+             </div>
+           </div>
+
+           <ul class="nav flex-column pt-3 pt-md-0">
+             <li class="nav-item">
+               <a href="/" class="nav-link d-flex align-items-center">
+                 <span class="sidebar-icon">
+                   <img src="{% if company_settings.miniature %} {{company_settings.miniature.url}} {% endif %} "
+                     height="20" width="20" alt="Volt Logo">
+                 </span>
+                 <span class="mt-1 ms-1 sidebar-text">{{company_settings.company_name}}</span>
+               </a>
+             </li>
+             <li class="nav-item {% if 'dashboard' in segment %} active {% endif %}">
+               <a href="{% url 'home' %}" class="nav-link">
+                 <span class="sidebar-icon">
+                  <img white="20" height="20" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAACkklEQVR4nO2Yz2sTURDHn0VRxHtV9OjNi3+EYqvY/0D0L/DQHhQPe/VaEHTzJg2ZiRFSdyap6EEP9W+Q4kGUiv2hUFA8KVITmf1Rl1ir22ySXXxf2Nt7m/nM983M2xjj5LRvAQWXLPE6oKxVGzxlyipAWQOSnj4W+b0pqwBls/QgQO0rFrmbQFgMLpqyyTY7k4D8MXQDZc6UUb1e7wAQPwmdIHnhed6EKaNsQ2YjJ/jTwkM5bcoowOCsJfmqIJU6z5gyqlarHbHIL+Mjda8wA8zWZTrTXuT7cat95ftLR4cXZdYBRrzuLS8f/Jd9lTrPRPv4G9Tb58w4BcQXkr6fet4AyrW9gKDZPgnIWyF8Q2bNONulJb5pUbbj4fVFJ7IlXv01leWtxfZ13/cPpfd6njdhiZ/H657pu8YCcbfVOgYkrRiga4nvJH1fg65i+6pFeZ0CegfEN+bnnx7WNYAyF7faLXUmeW+fq789uUIsPHh0BohX4nr4XGnw5d3WKZC6oa6k6mfVknxIEqDXkfSekYFo0Bp8XKArCvW3PVonWi9h3aQDQ9nsXzt0kPD6gOwByY/4SCzq8cryDgWyyBt73WphWCChA8gbYSFHZ31bC3y/xakzJpw1uPutdiggFQpO9WWwq63WDFGQF0jYFusybZE7SVsd5QcODAriU3DCEt+O2uTOxu9AvBQdg9F84EBWkORupAECyuMo6PQQ41u1Wuv4sAMfHCR1N9rJPvKixeB8lg+avIsTBgLRLtLsTGb90UKAVBs8FcIM+L/R2EHykgMpqyN5r8tdDoRG5Mi4Mg0O5A9yjtCIjhYU/OyDA6FiZRqcI1SsTINzhIqVaXCOULEyDc4RKlamwTlCxco0/E+O/AR7ZHvAz1qh/wAAAABJRU5ErkJggg==">
+                 </span>
+                 <span class="sidebar-text">Inicio</span>
+               </a>
+             </li>
+             
+             <li class="nav-item {% if 'gestionar_cer_pen' in segment %} active {% endif %}">
+              <a href="{% url 'certifico_list_pen' %}" class="nav-link">
+                <span class="sidebar-icon">
+                  <img white="20" height="20" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAACoklEQVR4nO2YS4vUQBDH4x7U9aTefHwRl/XiB9FdPQmeZV2RoKD3uSzMdMXZqUIPgakKKn4CRUQ8eZgV96Te19dBQRipzMMRZibpSXdnhSkITCZJd/1S1f+qdBQtbWlLK7Rm88kJQL4HJPsG5TeQ9G0Og/ILSBpxHK9E9Tgvr2ydngGSBIeAwZuv7HxtEECy/3dyvpWm6VHL5+uFMBM5b+u8Wu2RgIlJqz6vTgeHAIcA/X7/CJDs/BsNfugVwiWAngeHAMcAwSHAA0BQCPAEEAwCKgIUyXAcxyte1clBBMaFEEi2g0NAVQCUuxVaj0btAGmargLxy8UA+GftAGMI5BiIP9i249FhAKh1TlgC2FsLu5c05QzJu+h/jIBT8wVg0vQ0EF8FlMwg7xniH/kx+C0Gs82dR89OeQcAkgfDj/Y5n5H8Nenw+kiRDPFt/Q+KVAjly7D4rfoDQPlepOXQ4Qt6b4u65w3KW9t6YIjf7O4+PecFwCDfnxcBg3xj7Dzx51n3NVHWNEpzovFpIQhXhazozUdT5psWiXa7fTw4gCG5U7biQnE6bQUFULUps2CjkgC6sK3UqSpAgnKtzEKNygIMIDa8y6hW0/w6SuYawCCzdxltUvfM8Pn3HgD2vMtoo/H8WH6d+NsYCmUtWtCSCYnVMZ0BFNkkwKgaL2Itkou1APhIIUDpBQPQxsw5AEk3HABmm64BEswuB9tez9vmQVfpBMAQH7TbctLpvk6JMbadAaDcDLevg/JCtw+1AdNGrDIAymvrZq7avk5edK7rONoKa0s8M687vD4plVPG+QiPs7NWzrvY19EPmpH+K0RRJGDGm1/Yedc2TKetMgvbEB9ozo+q+qEybYkBZSOvEyi9vKcaHD1t1gzxFSu1WVpUj/0Bvqqe9m1NsBkAAAAASUVORK5CYII=">
+                </span>
+                <span class="sidebar-text">Certificos Pendientes</span>
+              </a>
+            </li>
+            <li class="nav-item {% if 'gestionar_certifico' in segment %} active {% endif %}">
+              <a href="{% url 'certifico_list' %}" class="nav-link">
+                <span class="sidebar-icon">
+                  <img white="20" height="20" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAACdUlEQVR4nO2YzW7TQBCATQ/83YBb3wIER4QqeJryIwSCUC4uvEEuldKdNPJMGqirzFgRQoJjoeIhyCPwcwAkKiEFrUPbNLaJHXt3aykjrRQrO7vz7ezOzo7nLWQhC5kprdbgIiC/BJKhQvkDJKMiTaEcAEnT9/0lz43x8qmo0RkgbesQMF750sY7gwCS4fHkvBaG4dmC+m4h1MSeL2q8FueegIlJy+pro61DQIUAo9HoDJBsnPQGbxmFqBJAf1uHgIoBrEOAAQCrEGAIwBoElASYFYZ9318yGp0q8MDRRQgkz61DQFkAlBclUo+mc4AwDC8A8f58APzbOcARBLIPxJ+LpuPeaQBwOicsAIpLp9M5D71ouR1Ed7w6eqBSsQkAJO+B+JduCuVdrQCCgK9MRij9e2P7zaXaAADxk5R74FEtAIDk9njrTD07iX9CN1o5VQCKZB1Qegr7DxTyPUDe/d/lFv+HvLuJ/btaJ9YlWXcCsEX9a/MUxiAFSo9lHUCvZFnj4Rhixz4A8aAqACAeWAdoNt+eA5SPGSt6oFCe6hs4biiNfzXVpPHIe3os6wDxeEF0Pd0oaST6ojRS+wbRVadhFJC/JYzqRcuJftoTidAqX4pNZgBAEX+fFwBQvjoFaFH/Rt4tpIifpfXNHUKNHOKM56XSB1bv+RyHWJF8cHKInYRRVbK8PjXWjouLbDirruMilYC8obRkXefQ3fuHRapxMsfbQHIfSFYB+fWsZE6RvIr7ah2ti+xbquucaKuZi9SNVuLUORmZfrQDvpXbWBN1nckos0lyM2sO1ZXH0zptkodeXUSF4WUjT0qbAiYe9QvxzMpfLiVXerB/KEUAAAAASUVORK5CYII=">
+                </span>
+                <span class="sidebar-text">Certifico</span>
+              </a>
+            </li>
+            
+             <li class="nav-item {% if 'gestionar_psi' in segment %} active {% endif %}">
+               <a href="{% url 'psi_list'%}" class="nav-link">
+                 <span class="sidebar-icon">
+                  <img white="20" height="20" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAACoklEQVR4nO2YS4vUQBDH4x7U9aTefHwRl/XiB9FdPQmeZV2RoKD3uSzMdMXZqUIPgakKKn4CRUQ8eZgV96Te19dBQRipzMMRZibpSXdnhSkITCZJd/1S1f+qdBQtbWlLK7Rm88kJQL4HJPsG5TeQ9G0Og/ILSBpxHK9E9Tgvr2ydngGSBIeAwZuv7HxtEECy/3dyvpWm6VHL5+uFMBM5b+u8Wu2RgIlJqz6vTgeHAIcA/X7/CJDs/BsNfugVwiWAngeHAMcAwSHAA0BQCPAEEAwCKgIUyXAcxyte1clBBMaFEEi2g0NAVQCUuxVaj0btAGmargLxy8UA+GftAGMI5BiIP9i249FhAKh1TlgC2FsLu5c05QzJu+h/jIBT8wVg0vQ0EF8FlMwg7xniH/kx+C0Gs82dR89OeQcAkgfDj/Y5n5H8Nenw+kiRDPFt/Q+KVAjly7D4rfoDQPlepOXQ4Qt6b4u65w3KW9t6YIjf7O4+PecFwCDfnxcBg3xj7Dzx51n3NVHWNEpzovFpIQhXhazozUdT5psWiXa7fTw4gCG5U7biQnE6bQUFULUps2CjkgC6sK3UqSpAgnKtzEKNygIMIDa8y6hW0/w6SuYawCCzdxltUvfM8Pn3HgD2vMtoo/H8WH6d+NsYCmUtWtCSCYnVMZ0BFNkkwKgaL2Itkou1APhIIUDpBQPQxsw5AEk3HABmm64BEswuB9tez9vmQVfpBMAQH7TbctLpvk6JMbadAaDcDLevg/JCtw+1AdNGrDIAymvrZq7avk5edK7rONoKa0s8M687vD4plVPG+QiPs7NWzrvY19EPmpH+K0RRJGDGm1/Yedc2TKetMgvbEB9ozo+q+qEybYkBZSOvEyi9vKcaHD1t1gzxFSu1WVpUj/0Bvqqe9m1NsBkAAAAASUVORK5CYII=">
+                 </span>
+                 <span class="sidebar-text">PSI</span>
+               </a>
+             </li>
+
+             <li class="nav-item {% if 'gestionar_cliente' in segment %} active {% endif %}">
+               <a href="{% url 'cliente_list'%}" class="nav-link">
+                 <span class="sidebar-icon">
+                  <img white="20" height="20" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAADpUlEQVR4nO1ZSWsUQRRuvai4oBEVVLy4oDc9iRJBcLnofzB6UMG7RkUC/gNNCMxUjZN+z+TQZN4bFwQvEvAUjXrTiBi3oCeJO4mXkddJTyrD9ExNd80kQj4o6KH666qv6r2vlvG8RSyiuegJglUK6aoCfqaQfknRwCMa+YrUueY5hfJpj0b6oJFL1YoCfp/pH9ztiucUiA/WaKSxuE4YnXmrdXF1Wp5zyFSXG0P6oaB4Wg3c2RQWeUb6YdR3puU5h0J6bozW2cp67dP58ogCj6TlOYcC/hM1lMsFGyrre6GwcTYk6HdannPIx607AvwzLc855oQC8rlEIdQAzzkU0GUzGTVwh7iGlMpk1MCX0vKcQ+wwtLoENpqE1xTIYqOQ3sV3hMaqLUhJeU0BwMOVEhYK6akknRR5Fg+XOte8Rfz3yN6mkxr4iQKeqpeIGvizJG3DvNlEnhKOxsIJd523bFxKFgoXkvCql0J6EWHCNdDorf7BnUl4MbM5nF6AMf0qCNqazfN9Wm9Y66SXFuaItIKXlrsgBOT84lE9UNycz+eXN8p11hGno/i/CJBc0UhnNHBRAY1GB/+ZZ5aNX2///XULTkAQBCumbyvou4UzfZMjqnAWhACJ9emFq1GLpRcZ/+62eRWQxcJWhTQe18kM8MGcT+01ZuNTX9+9LfMiIAwb4Ge1Rtmr8q3KIgtmTbdqlgCFfK1emHgWAupexZjHvUau/8ybiGhzV64LgjabhPUsBUhix7qTWFj0Yg6K+20FaKQ3cbzQKi0S1bMVMC2iI24ks+WpArppK0Ah+UYD3XMEABddC1BAFL+sl1+kyext3mslAArHjAb+ar+4z+jQ6yYIGK0xmjxkJMx4LRHSUYn5Uqm0RCE/nuXxl66urqWVeSVW6SVEzrBY+Wbsi7LH18BfZ9WGW+Vu7dMBSWw5kMuzRu6ZPlHRdeFlfdo1s3KGvMjuTAHSiaQCssiHrASUXzZE1C40GYWM8CLHiRadlodQBAV3diigR3U/hjyU6aPtc3hhONHx8DcSO3ch5IJnC418RCNnNPLLmbudaMeoFfLhOF60Hsiu0vkMIJ3yWoVw22zkRloBCmkin+e1LRNQ+a9NagHAF71WQxyp3s2FZyMAeNjJ0TMJxJVkSxzXuZxP7aZVVnGej3Ke8OYTMweaYUunKRlx/9zqQNPCcOq0SWyFNCExf+PGg2XeQoNsiTVwR7hOAL+KruDlWTZrYpUtd5tFeI3jH7iyS4ODpC7OAAAAAElFTkSuQmCC">
+                 </span>
+                 <span class="sidebar-text">Clientes</span>
+               </a>
+             </li>
+             <li class="nav-item {% if 'gestionar_asesorador' in segment %} active {% endif %}">
+              <a href="{% url 'asesorador_list'%}" class="nav-link">
+                <span class="sidebar-icon">
+                  <img white="20" height="20" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAADl0lEQVR4nO1Zy2vUQBiPCD7wgfao4sEXHnprbyqoVS968h+wLXgQrEcpevLWa0GE3Zm6zTe7HobNfPFBwYsUBO0DrSeriBfrpQexDxHby8qXZNdtm00ySTbrwv5gYHcnv8zvN/N930yyhtFBB83F6OjETgbWHSbUFBPql9emuMAh6kublyrGx58fZgI/cIEV3wZqjq5Ji5cqnBkMElEnpn5G4/JSBy1/qAivMVC3k/JSBwecjiqEA75NyksdHHBVQ8hqUl7q0BHCQC0n5aWO9g8hgUNxkjEuL3VQiaNSF6UcSil3JOU1BbTZBIoJ2Mji8JoCmiVaaopXJ0EBV5nAN/Rb0AzG5XXQ9sgX1TUOOMMA18KrCH59KOVeXV4df404XFhX0xMftYZTK6qbsXi+zUpuggk1qzNoXlhH4vAabGrTyQ1oLD81KeX2ODz/pv4kNqA7aFxe2P3awgAD9YkJNcIF9uVK5dMAL/e0hQHKlzxYFxOLbYGBdQbqVqVS2UYcJmUXF2qQA9reargP/u5nZGAPPCq9OGj8FwYAfzCB5+laKeVuJtR9ehbg4bwlLvAecVppYJ0X7QvOdU/sQ+7GpZkzoOZy5rOjLTFAYUPX0J7BhPquLV7UVmMh9ASbugHAGYp5J2wA38UWL7zJEGq2UCjsys6AFzoU80nF838mhhsaYEKt6NysWrsZ4G+f2Z93+qTsipSwwrctshL2jJnqbN19lxpWJyphOgOMlcrH3BVQX3xmasTrG4wrnoPV7dzDtHs3TU5/AwOY11pOU133Vs706e9zBge0E4kHq9v5Xj8uKOVrYMy0L2kOlHONW5c39+VNdcrLj89piufeMSQgD3Ay8gqAWi4U8ABVGibw9YZ+bu/zyytWLJ/xQmKLsCjivfBcaWjgcal8knbOyDMG+IB4NOPezun8Xi13WwyUsKeBwMUo4kMNOGIEntMwsV4VRbxqxaluOj4h5Cd0Mar40BCqhRI8PcFAvQoNI4GTuXF1fAPPCSd1xVsBDA0ViC7ea5YRFVRNKFm5wI/uu53aiZFXD2h+EGJiv2vIHghLVk3xFEI3jKzgHJvrcmOLCdPuDUhqP/E/qXAYWYKOxJGLggirfHjXyBpUkdJ6c1EIOsw1E+4LX1yIP/PqGz1PGK2E90AT/Q8QUYv795EeaDIMp+GAxK7UJyzFfGZ/jOuAjsQcsN/ZJwDnq6/g6TMd1qhUZl5tOjD08ReXrKNSzVHNwQAAAABJRU5ErkJggg==">
+                </span>
+                <span class="sidebar-text">Asesorador</span>
+              </a>
+            </li>
+
+         
+            {% if request.user.permiss == 'Administrador' or request.user.is_superuser%}
+             <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
+           
+            
+           
+            <li class="nav-item {% if 'general-settings' in segment %} active {% endif %}">
+              <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
+                data-bs-toggle="collapse" data-bs-target="#generel_settings">
+                <span>
+                  <span class="sidebar-icon">
+                    <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd"
+                        d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
+                        clip-rule="evenodd"></path>
+                    </svg>
+                  </span>
+                  <span class="sidebar-text">Ajustes</span>
+                </span>
+                <span class="link-arrow">
+                  <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                      clip-rule="evenodd"></path>
+                  </svg>
+                </span>
+              </span>
+              <div class="multi-level collapse {% if 'general-settings' in segment %} show {% endif %}" role="list"
+                id="generel_settings" aria-expanded="false">
+                <ul class="flex-column nav">
+                  <li class="nav-item {% if 'general-settings-company' in segment %} active {% endif %}">
+                    <a href="{% url 'ajustes' company_settings.id %}" class="nav-link">
+                      <span class="sidebar-text">Ajustes generales</span>
+                    </a>
+                  </li>
+                  <li class="nav-item {% if 'general-settings-users' in segment %} active {% endif %}">
+                    <a href="{% url 'users_list' %}" class="nav-link">
+                      <span class="sidebar-text">Usuarios</span>
+                    </a>
+                  </li>
+                  <li class="nav-item {% if 'general-settings-certificadores' in segment %} active {% endif %}">
+                    <a href="{% url 'certificador_list' %}" class="nav-link">
+                      <span class="sidebar-text">Certificadores</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+
+            {% endif %}
+              
+            
+
+             </li>
+
+           </ul>
+         </div>
+       </nav>

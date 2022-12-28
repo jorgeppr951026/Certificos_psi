@@ -1,0 +1,142 @@
+{% extends "layouts/base.html" %}
+{% load bootstrap5 %}
+{% block title %} Listado de Certificadores {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="/static/assets/datatables/datatables.min.css" />
+
+
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="py-4">
+
+    <div class="d-flex justify-content-end">
+        <a href="{% url 'certificador_create' %}" class="btn btn-primary animate-up-2">
+            <i class="fa fa-plus"></i>
+            Crear Certidicador</a>
+    </div>
+
+</div>
+
+
+
+<div class="card border-0 shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="certificadorsTable" class="table table-centered table-nowrap mb-0 rounded">
+                <thead class="thead-light">
+                    <tr>
+                        <th class="border-0 rounded-start">#</th>
+                        <th class="border-0">Nombre:</th>
+                        <th class="border-0">Cargo:</th>
+                        <th class="border-0">Tomo:</th>
+                        <th class="border-0">Folio:</th>
+                        <th class="border-0">Número:</th>
+                       
+                        <th class="border-0 rounded-end">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for certificador in object_list   %}
+
+                    <!-- Item -->
+                    <tr>
+                        <td><a href="#" class="text-primary fw-bold">{{certificador.id}}</a> </td>
+                     
+                        <td> {{certificador.name }} </td>
+                        <td> {{certificador.cargo }} </td>
+                        <td> {{certificador.tomo }} </td>
+                        <td> {{certificador.folio }} </td>
+                        <td> {{certificador.numero }} </td>
+                       
+                        <td class="text-success">
+                            <div class="d-flex align-items-center">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                   
+                                 
+                                    <a href="{% url 'certificador_update' certificador.id %}" type="button"
+                                        class="btn btn-sm btn-secondary">
+                                        <i class="fas fa-edit" aria-hidden="true"></i>
+                                    </a>
+                                    <button onclick="delete_certificador('{% url 'certificador_delete' certificador.id %}')" type="button"
+                                        class="btn btn-sm btn-primary">
+                                        <i class="fas fa-trash" aria-hidden="true"></i>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- End of Item -->
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--<div class="modal fade" id="update_certificador" role="dialog"></div>-->
+<div class="modal fade" id="delete_certificador" role="dialog"></div>
+<div class="modal fade" id="create_certificador" role="dialog"></div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+    function create_certificador(url) {
+        $('#create_certificador').load(url, function () {
+            $(this).modal('show');
+        });
+    }
+</script>
+
+<script>
+    function delete_certificador(url) {
+        $('#delete_certificador').load(url, function () {
+            $(this).modal('show');
+        });
+    }
+</script>
+
+<script>
+    function update_certificador(url) {
+        $('#update_certificador').load(url, function () {
+            $(this).modal('show');
+        });
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        var table = $('#certificadorsTable').DataTable({
+
+            buttons: [{
+                extend: 'copy',
+                text: 'Copiar'
+            }, 'csv', 'excel', 'pdf'],
+            language: {
+                "lengthMenu": "Mostrar _MENU_ registros",
+                "zeroRecords": "No se encontró nada - lo sentimos",
+                "info": "Mostrando pagina _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                "search": "Buscar:",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                },
+            }
+        });
+
+        table.buttons().container()
+            .appendTo('#certificadorsTable_wrapper .col-md-6:eq(0)');
+    });
+</script>
+
+{% endblock javascripts %}

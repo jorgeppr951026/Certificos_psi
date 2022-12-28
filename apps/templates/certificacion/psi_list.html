@@ -1,0 +1,150 @@
+{% extends "layouts/base.html" %}
+{% load bootstrap5 %}
+{% block title %} Listado de PSI {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="/static/assets/datatables/datatables.min.css" />
+
+
+{% endblock stylesheets %}
+
+{% block content %}
+<div class="py-4">
+
+    <div class="d-flex justify-content-end">
+        <a href="{% url 'psi_create' %}" class="btn btn-primary animate-up-2">
+            <i class="fa fa-plus"></i>
+            Crear PSI</a>
+    </div>
+
+</div>
+
+
+
+<div class="card border-0 shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="psisTable" class="table table-centered table-nowrap mb-0 rounded">
+                <thead class="thead-light">
+                    <tr>
+                        <th class="border-0 rounded-start">#</th>
+                        <th class="border-0">Fecha:</th>
+                        <th class="border-0">Cliente:</th>
+                        <th class="border-0">Asesorador:</th>
+                        <th class="border-0">Certificador:</th>
+                        <th class="border-0">Estado:</th>
+                     
+                       
+                        <th class="border-0 rounded-end">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for psi in object_list   %}
+
+                    <!-- Item -->
+                    <tr>
+                        <td><a href="#" class="text-primary fw-bold">{{psi.id}}</a> </td>
+                     
+                        <td> {{psi.fecha |date:'d/m/Y'}} </td>
+                        <td> {{psi.cliente.name }} </td>
+                        <td> {{psi.asesorador.name }} </td>
+                        <td> {{psi.certificador.name }} </td>
+                        <td>
+                            {% if psi.estado %}
+                                <p class="text-success">Certificado</p>
+                            {% else %}
+                            <p class="text-danger">Pendiente</p>
+                            {% endif %}
+
+                        </td>
+                       
+                       
+                        <td class="text-success">
+                            <div class="d-flex align-items-center">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                 
+                                    <a href="{% url 'psi_update' psi.id %}" type="button"
+                                        class="btn btn-sm btn-secondary">
+                                        <i class="fas fa-edit" aria-hidden="true"></i>
+                                    </a>
+                                    <button onclick="delete_psi('{% url 'psi_delete' psi.id %}')" type="button"
+                                        class="btn btn-sm btn-primary">
+                                        <i class="fas fa-trash" aria-hidden="true"></i>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <!-- End of Item -->
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--<div class="modal fade" id="update_psi" role="dialog"></div>-->
+<div class="modal fade" id="delete_psi" role="dialog"></div>
+<div class="modal fade" id="create_psi" role="dialog"></div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+    function create_psi(url) {
+        $('#create_psi').load(url, function () {
+            $(this).modal('show');
+        });
+    }
+</script>
+
+<script>
+    function delete_psi(url) {
+        $('#delete_psi').load(url, function () {
+            $(this).modal('show');
+        });
+    }
+</script>
+
+<script>
+    function update_psi(url) {
+        $('#update_psi').load(url, function () {
+            $(this).modal('show');
+        });
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        var table = $('#psisTable').DataTable({
+
+            buttons: [{
+                extend: 'copy',
+                text: 'Copiar'
+            }, 'csv', 'excel', 'pdf'],
+            language: {
+                "lengthMenu": "Mostrar _MENU_ registros",
+                "zeroRecords": "No se encontró nada - lo sentimos",
+                "info": "Mostrando pagina _PAGE_ de _PAGES_",
+                "infoEmpty": "No hay registros disponibles",
+                "infoFiltered": "(filtrado de _MAX_ registros totales)",
+                "search": "Buscar:",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Ultimo",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                },
+            }
+        });
+
+        table.buttons().container()
+            .appendTo('#psisTable_wrapper .col-md-6:eq(0)');
+    });
+</script>
+
+{% endblock javascripts %}

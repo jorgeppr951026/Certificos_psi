@@ -1,0 +1,70 @@
+{% extends "layouts/base.html" %}
+{% load bootstrap5 %}
+{% block title %} Actualizar Pronóstico {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<form action="{% url 'certifico_create' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+
+ <div class="card border-0 shadow mb-4 mt-5">
+        <div class="card-header">
+            <h5 class="card-title">Crear certifico</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-3">{% bootstrap_field form.code %}</div>
+                <div class="col-3 mb-3"><label class="form-label" for="id_fecha">Fecha</label>
+                    <input type="text" name="fecha"
+                        class="form-control datepicker_input"  placeholder="Fecha" title="" required="" id="id_fecha"></div>
+                <div class="col-6">{% bootstrap_field form.cliente %}</div>
+            </div>
+            <div class="row">
+                <div class="col-4">{% bootstrap_field form.asesorador %}</div>
+                <div class="col-4">{% bootstrap_field form.certificador %}</div>
+                <div class="col-4">{% bootstrap_field form.psi %}</div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="col text-end" >
+                <button type="submit" class="btn btn-success animate-up-2">Actualizar</button>
+                <a href="{% url 'certifico_list' %}" type="button" class="btn btn-secondary animate-up-2">Cerrar</a>
+            </div>
+        </div>
+    </div>
+
+
+</form>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+<script>
+    /* Bootstrap 5 JS included */
+    /* vanillajs-datepicker 1.1.4 JS included */
+
+    const getDatePickerTitle = elem => {
+        // From the label or the aria-label
+        const label = elem.nextElementSibling;
+        let titleText = '';
+        if (label && label.tagName === 'LABEL') {
+            titleText = label.textContent;
+        } else {
+            titleText = elem.getAttribute('aria-label') || '';
+        }
+        return titleText;
+    }
+
+    const elems = document.querySelectorAll('.datepicker_input');
+    for (const elem of elems) {
+        const datepicker = new Datepicker(elem, {
+            autoclose: true,
+            'format': 'dd/mm/yyyy',
+
+            title: getDatePickerTitle(elem)
+        });
+    }
+</script>
+{% endblock javascripts %}
